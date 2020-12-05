@@ -27,10 +27,10 @@ https://docs.google.com/spreadsheets/d/18siGr3tx1kTAeZ6nhJ3y1zSdFuseH4ApviyQzjZ4
 
 ## 開発環境
 - OS：windows10
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
+- 言語：HTML,CSS,JavaScript,Ruby2.5.7p206,SQL
+- フレームワーク：Ruby on Rails 5.2.4.4
 - JSライブラリ：jQuery
-- 仮想環境：Vagrant,VirtualBox
+- 仮想環境：Vagrant 2.2.14, VirtualBox5.2.6
 
 ## 使用素材
 タカラトミー社発売のカードゲーム、wixoss
