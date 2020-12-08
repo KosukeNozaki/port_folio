@@ -1,2 +1,36 @@
-<h1>Publics::Cards#index</h1>
-<p>Find me in app/views/publics/cards/index.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>カード一覧</h2>
+			      		<tr>
+			      			<th></th>
+			      			<th>カード名</th>
+			      			<th>値段</th>
+			      			<th>ジャンル</th>
+			      			<th>販売ステータス</th>
+			      		</tr>
+		      		</thead>
+		      		<tbody>
+						<% @cards.each do |card| %>
+							<tr>
+								<td><%= attachment_image_tag card, :image, style:"height:150px;, width:150px;" %></td>
+								<td><%= card.name %></td>
+								<td><%= card.price %></td>
+								<td><%= card.genre.name %></td>
+								<td><% if card.is_active == true %>
+									販売中
+									<% else card.is_active == false %>
+									売り切れ中
+									<% end %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

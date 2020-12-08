@@ -18,4 +18,8 @@ class Publics::CartCardsController < ApplicationController
   def create
   end
   # カート内カードデータ追加
+  private
+  def card_card_params
+    params.require(:cart_card).permit(:card_id, :customer_id, :amount)
+  end
 end

@@ -1,2 +1,42 @@
-<h1>Publics::Customers#show</h1>
-<p>Find me in app/views/publics/customers/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>マイページ</h2>
+						<tr>
+							<th>氏名</th>
+							<td><%= customer.full_name %></td>
+						</tr>
+						<tr>
+							<th>メールアドレス</th>
+							<td><%= customer.email %></td>
+						</tr>
+						<tr>
+							<th>郵便番号</th>
+							<td><%= customer.postal_code %></td>
+						</tr>
+						<tr>
+							<th>住所</th>
+							<td><%= customer.address %></td>
+						</tr>
+						<tr>
+							<th>電話番号</th>
+							<td><%= customer.telephone_number %></td>
+						</tr>
+
+						<tr>
+							<th>退会ステータス</th>
+							<td><%= if is_active == true %>
+								会員
+								<%= else is_active == false %>
+								退会
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
