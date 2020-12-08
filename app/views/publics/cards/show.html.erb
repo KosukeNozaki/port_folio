@@ -1,2 +1,33 @@
-<h1>Publics::Cards#show</h1>
-<p>Find me in app/views/publics/cards/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>カード詳細画面</h2>
+						<tr>
+							<h4>カード名</h4>
+							<th><%= card.name %></th>
+						</tr>
+						<tr>
+							<h4>カード説明文</h4>
+							<th><%= card.introduction %></th>
+						</tr>
+						<tr>
+							<h4>税抜き価格</h4>
+							<th><%= card.price %></th>
+						</tr>
+						<tr>
+							<h4>販売ステータス</h4>
+							<th><%= if is_active == true %>
+								販売中
+								<%= else is_active == false %>
+								売り切れ
+							</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
