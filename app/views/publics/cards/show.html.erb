@@ -1,31 +1,41 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-2">
+		<div class="col-xs-4">
 			<div class="table">
 				<table>
 					<thead>
 						<h2>カード詳細画面</h2>
+						<%= attachment_image_tag @card, :image, style:"height:300px;, width:300px;" %>
 						<tr>
-							<h4>カード名</h4>
-							<th><%= card.name %></th>
+							<th>カード名</th>
+							<td><%= @card.name %></td>
 						</tr>
 						<tr>
-							<h4>カード説明文</h4>
-							<th><%= card.introduction %></th>
+							<th>カード説明文</th>
+							<td><%= @card.introduction %></td>
 						</tr>
 						<tr>
-							<h4>税抜き価格</h4>
-							<th><%= card.price %></th>
+							<th>税抜き価格</th>
+							<td><%= @card.price %></td>
 						</tr>
+						<tbody>
+						 <% if customer_signed_in? %>
+						<%= form_with model:@cart_card, url:cart_cards_path, local:true do |f| %>
 						<tr>
-							<h4>販売ステータス</h4>
-							<th><%= if is_active == true %>
-								販売中
-								<%= else is_active == false %>
-								売り切れ
-							</th>
+							<th>数量</th>
+							<td><%= f.number_field :amount, min: 1, max: 10, required: true %></td>
 						</tr>
-					</thead>
+							<td><%= f.hidden_field :customer_id, value: current_customer.id %></td>
+							<td><%= f.hidden_field :card_id, value: @card.id %></td>
+						<tr>
+							<td><%= f.submit "カートに追加" %></td>
+						</tr>
+							<% end %></td>
+							<% else %>
+							<h2>カートに追加するには会員登録が必要です。</h2>
+							<% end %>
+						</tbody>
+						</thead>
 				</table>
 			</div>
 		</div>

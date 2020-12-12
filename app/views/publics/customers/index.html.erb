@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>退会確認画面</h2>
+						<%= form_with(model: @customer, url:status_customers_path, method: :patch, local: true) do |f| %>
+					</thead>
+					<tbody>
+						<tr>
+							<th>本当に退会しますか？今まで登録した情報は全て無くなります。</th>
+						</tr>
+						<tr>
+							<td><%= link_to "退会しない", customer_path(current_customer) %></td>
+							<td><%= f.submit "退会する", data: {confirm: "本当によろしいですか？"}, class: "btn btn-outline_danger" %></td>
+						</tr>
+							<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
