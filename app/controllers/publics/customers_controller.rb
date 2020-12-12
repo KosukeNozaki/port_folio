@@ -5,20 +5,26 @@ class Publics::CustomersController < ApplicationController
   # 顧客のマイページ
 
   def edit
-    @customer = Customer(params[:id])
+    @customer = Customer.find(params[:id])
   end
   # 顧客の登録情報編集画面
   def update
-    @customer = Customer(params[:id])
+    @customer = Customer.find(params[:id])
     @customer.update(customer_params)
+    redirect_to customer_path(@customer)
   end
   # 顧客の登録情報更新
 
   def index
+
   end
   # 顧客の退会確認画面
 
   def status
+    @customer = current_customer
+    @customer.update(is_active: false)
+    sign_out
+    redirect_to root_path
   end
   # 顧客の退会処理（ステータスの更新）
   private
