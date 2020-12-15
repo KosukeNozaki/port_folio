@@ -6,7 +6,7 @@
 					<thead>
 						<h2>カード編集画面</h2>
 					</thead>
-					<%= form_with model:@card do |f| %>
+					<%= form_with model:@card, url:admins_card_path, method: :patch, local:true do |f| %>
 					<tbody>
 						<tr>
 							<th>カード名</th>

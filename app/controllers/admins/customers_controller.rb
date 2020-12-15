@@ -11,13 +11,13 @@ class Admins::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
-
   end
   # 顧客編集画面
 
   def update
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
+    redirect_to admins_customers_path
   end
   # 顧客情報の更新
   private

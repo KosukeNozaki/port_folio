@@ -26,6 +26,7 @@ class Publics::OrdersController < ApplicationController
   end
   # 注文確定処理
   def create
+    @orders = current_customer.orders
     @order = Order.new
     @order.customer_id = params[:order][:customer_id]
     @order.id = params[:order][:order_id]
