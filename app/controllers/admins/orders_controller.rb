@@ -12,6 +12,7 @@ class Admins::OrdersController < ApplicationController
   def update
   	@order = Order.find(params[:id])
   	@order.update(order_params)
+  	redirect_to orders_path
   end
   # 注文ステータス更新
   private

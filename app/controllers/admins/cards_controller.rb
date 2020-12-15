@@ -12,7 +12,7 @@ class Admins::CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-    @card.saveF
+    @card.save
     redirect_to admins_cards_path
   end
 
@@ -24,6 +24,7 @@ class Admins::CardsController < ApplicationController
   # 商品編集画面
   def edit
     @card = Card.find(params[:id])
+    @genres = Genre.all
   end
   def destroy
     @card = Card.find(params[:id])
