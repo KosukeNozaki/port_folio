@@ -1,2 +1,43 @@
-<h1>Publics::Cards#show</h1>
-<p>Find me in app/views/publics/cards/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>カード詳細画面</h2>
+						<%= attachment_image_tag @card, :image, style:"height:300px;, width:300px;" %>
+						<tr>
+							<th>カード名</th>
+							<td><%= @card.name %></td>
+						</tr>
+						<tr>
+							<th>カード説明文</th>
+							<td><%= @card.introduction %></td>
+						</tr>
+						<tr>
+							<th>税抜き価格</th>
+							<td><%= @card.price %></td>
+						</tr>
+						<tbody>
+						 <% if customer_signed_in? %>
+						<%= form_with model:@cart_card, url:cart_cards_path, local:true do |f| %>
+						<tr>
+							<th>数量</th>
+							<td><%= f.number_field :amount, min: 1, max: 10, required: true %></td>
+						</tr>
+							<td><%= f.hidden_field :customer_id, value: current_customer.id %></td>
+							<td><%= f.hidden_field :card_id, value: @card.id %></td>
+						<tr>
+							<td><%= f.submit "カートに追加" %></td>
+						</tr>
+							<% end %></td>
+							<% else %>
+							<h2>カートに追加するには会員登録が必要です。</h2>
+							<% end %>
+						</tbody>
+						</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

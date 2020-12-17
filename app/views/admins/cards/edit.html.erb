@@ -1,2 +1,45 @@
-<h1>Admins::Cards#edit</h1>
-<p>Find me in app/views/admins/cards/edit.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="table">
+				<table>
+					<thead>
+						<h2>カード編集画面</h2>
+					</thead>
+					<%= form_with model:@card, url:admins_card_path, method: :patch, local:true do |f| %>
+					<tbody>
+						<tr>
+							<th>カード名</th>
+							<td><%= f.text_field :name %></td>
+						</tr>
+						<tr>
+							<th>カード説明文</th>
+							<td><%= f.text_field :introduction %></td>
+						</tr>
+						<tr>
+							<th>値段</th>
+							<td><%= f.number_field :price, min: 0 %></td>
+						</tr>
+						<tr>
+							<th>カード画像</th>
+							<td><%= f.attachment_field :image %></td>
+						</tr>
+						<tr>
+							<th>ジャンル選択</th>
+							<td><%= f.collection_select(:genre_id, @genres, :id, :name ) %></td>
+						</tr>
+						<tr>
+							<h4>販売ステータス</h4>
+							<td><%= f.radio_button :is_active, checked: true %>販売中
+							<%= f.radio_button :is_active, "売り切れ" %>売り切れ</td>
+						</tr>
+						<tr>
+							<td><%= f.submit "情報更新" %></td>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

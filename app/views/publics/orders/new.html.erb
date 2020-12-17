@@ -1,2 +1,65 @@
-<h1>Publics::Orders#new</h1>
-<p>Find me in app/views/publics/orders/new.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="table">
+				<h2>商品情報入力</h2>
+				<table>
+				<%= form_with(model: @order, url:confirm_orders_path, local:true) do |f| %>
+					<thead>
+							<tr>
+								<th>支払い方法</th>
+							</tr>
+							<tr>
+								<td><%= f.radio_button :payment_method, 0 %></td>
+								<th>クレジットカード</th>
+							</tr>
+							<tr>
+								<td><%= f.radio_button :payment_method, 1 %></td>
+								<th>銀行振込</th>
+							</tr>
+					</thead>
+				</table>
+				<table>
+					<thead>
+							<th>お届け先</th>
+						<tr>
+							<td><%= radio_button_tag(:address_option, 0) %></td>
+							<th>ご自身の住所</th>
+						</tr>
+						<tr>
+							<td><%= radio_button_tag(:address_option, 1) %></td>
+							<th>登録済住所から選択</th>
+						</tr>
+						<tr>
+							<td><%= radio_button_tag(:address_option, 2) %></td>
+							<th>新しいお届け先</th>
+						</tr>
+					</thead>
+				<tbody>
+						<tr>
+							<td>〒<%= current_customer.postal_code %></td>
+							<td><%= current_customer.address %></td>
+							<td><%= current_customer.full_name %></td>
+						</tr>
+							<td><%= f.collection_select(:delivery, @addresses, :id, :registration_address) %></td>
+						<tr>
+								<th>郵便番号(ハイフンなし)</th>
+								<td><%= f.text_field :郵便番号 %></td>
+						</tr>
+						<tr>
+								<th>住所</th>
+								<td><%= f.text_field :住所 %></td>
+						</tr>
+						<tr>
+								<th>宛名</th>
+								<td><%= f.text_field :宛名 %></td>
+						</tr>
+								<td><%= f.submit "注文確認へ" %></td>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+

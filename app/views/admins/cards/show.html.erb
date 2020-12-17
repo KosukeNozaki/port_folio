@@ -1,2 +1,29 @@
-<h1>Admins::Cards#show</h1>
-<p>Find me in app/views/admins/cards/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="table">
+				<table>
+					<thead>
+						<th>カード詳細画面</th>
+						<tr>
+							<th>カード名</th>
+							<td><%= card.name %></td>
+						</tr>
+						<tr>
+							<th>カード説明文</th>
+							<td><%= card.introduction %></td>
+						</tr>
+						<tr>
+							<th>税抜き価格</th>
+							<td><%= card.price %></td>
+						</tr>
+						<tr>
+							<%= link_to "カード編集画面へ" edit_admins_card_path(@card) %>
+							<%= link_to "商品一覧へ" admins_cards_path %>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
