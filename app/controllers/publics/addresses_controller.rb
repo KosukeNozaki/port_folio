@@ -1,7 +1,8 @@
 class Publics::AddressesController < ApplicationController
     # 配送先一覧・追加
   def index
-    @addresses = current_customer.address
+    @customer = current_customer
+    @addresses = @customer.addresses
     @address = Address.new
   end
 
@@ -11,6 +12,8 @@ class Publics::AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
+    # リレーションのため左辺にログインしてる人のidを入れる
     @address.save
     redirect_to addresses_path
   end
