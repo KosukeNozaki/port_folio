@@ -26,18 +26,23 @@ class Publics::OrdersController < ApplicationController
   end
   # 注文確定処理
   def create
-    @orders = current_customer.orders
-    @order = Order.new
-    @order.customer_id = params[:order][:customer_id]
-    @order.id = params[:order][:order_id]
-    @order.name = params[:order][:name]
-    @order.postal_code = params[:order][:postal_code]
-    @order.email = params[:order][:email]
-    @order.address = params[:order][:address]
-    @order.telephone_number = params[:order][:telephone_number]
+    @customer = current_customer
+    @orders = @customer.orders
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
     @order.status = 0
     @order.postage = 200
-    @order.save!
+    @order.save
+      @cards = current_customer.cart_cards
+      @cards.each do |card|
+        @order_items = OrderItem.new
+        @card = Card.find(card.card_id)
+        @order_items.order_id = @order.id
+        @order_items.order_price = @card.price
+        @order_items.card_id = card.card_id
+        @order_items.amount = card.amount
+        @order_items.save
+      end
     current_customer.cart_cards.destroy_all
     redirect_to root_path
   end
@@ -48,9 +53,12 @@ class Publics::OrdersController < ApplicationController
   # 注文履歴詳細画面
   def show
     @order = Order.find(params[:id])
+    @order_items = @order.order_items
+    @total_price = @order.order_price + @order.postage
   end
   private
   def order_params
-    params.require(:order).permit(:customer_id, :postal_code, :email, :address, :telephone_number, :order_price, :paymentt_method, :status, :postage)
+    params.require(:order).permit(:customer_id,:postal_code, :email, :address, :telephone_number, :order_price, :paymentt_method, :status, :postage, :amount, :name, :card_id)
+
   end
 end

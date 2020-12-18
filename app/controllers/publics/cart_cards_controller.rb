@@ -26,7 +26,7 @@ class Publics::CartCardsController < ApplicationController
   # カート内カードのデータ削除（すべて）
 
   def create
-    @cart_card = CartCard.new(card_card_params)
+    @cart_card = CartCard.new(cart_card_params)
     @cart_cards = current_customer.cart_cards
     if @cart_cards.find_by(card_id: @cart_card.card_id)
       @cart_card_update = @cart_cards.find_by(card_id: @cart_card.card_id)
@@ -39,7 +39,7 @@ class Publics::CartCardsController < ApplicationController
   end
   # カート内カードデータ追加
   private
-  def card_card_params
+  def cart_card_params
     params.require(:cart_card).permit(:card_id, :customer_id, :amount)
   end
 end

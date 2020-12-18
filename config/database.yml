@@ -19,17 +19,3 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-
-production:
-  <<: *default
-  database: db/production.sqlite3
-production:
-  <<: *default
-  database: <%= ENV['port_folio'] %>
-  adapter: mysql2
-  encoding: utf8mb4
-  charset: utf8mb4
-  collation: utf8mb4_general_ci
-  host: <%= ENV['rds-mysql-server.cbohxm0gp7sk.ap-northeast-1.rds.amazonaws.com'] %>
-  username: <%= ENV['root'] %>
-  password: <%= ENV['port_pass'] %>
