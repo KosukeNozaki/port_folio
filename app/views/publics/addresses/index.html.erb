@@ -4,7 +4,7 @@
 			<div class="table">
 				<h2>配送先登録と一覧</h2>
 				<table>
-				  <%= form_with(model: @address, local:true) do |f| %>
+				  <%= form_with(model: @address, url:addresses_path, method: :post, local:true) do |f| %>
 				  <thead>
 				    <tr>
 				      <th>郵便番号(ハイフンなし)</th>
@@ -29,6 +29,6 @@
 				      <td><%= link_to "編集する", edit_address_path(address) %></td>
 				      <td><%= link_to "削除する", address_path(address), method: :delete %> </td>
 				      <% end %>
-				      <%=  link_to "注文履歴の詳細へ", order_path(@order) %>
+				      <%=  link_to "注文履歴の詳細へ", orders_path %>
 				    </tr>
 				  </tbody>
