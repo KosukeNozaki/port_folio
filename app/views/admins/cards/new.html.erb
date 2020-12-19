@@ -3,7 +3,7 @@
 		<div class="col-lg-6">
 			<div class="table">
 				<table>
-					<%= form_with model:@card, url:admins_cards_path, method: :post do |f| %>
+					<%= form_with model:@card, url:admins_cards_path, method: :post, local:true do |f| %>
 						<thead>
 							<tr>
 								<th>商品登録画面</th>

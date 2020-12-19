@@ -5,6 +5,10 @@ class Publics::OrdersController < ApplicationController
     @addresses = Address.where(customer_id: current_customer)
     # ログインしている顧客のidを取得
   end
+  # クレジットカードor銀行振込入力画面
+    def payment_screen
+    @order = Order.new(order_params)
+    end
     # 注文情報確認画面
   def confirm
     @cart_cards = current_customer.cart_cards
@@ -43,6 +47,7 @@ class Publics::OrdersController < ApplicationController
         @order_items.amount = card.amount
         @order_items.save
       end
+      byebug
     current_customer.cart_cards.destroy_all
     redirect_to root_path
   end
@@ -58,7 +63,8 @@ class Publics::OrdersController < ApplicationController
   end
   private
   def order_params
-    params.require(:order).permit(:customer_id,:postal_code, :email, :address, :telephone_number, :order_price, :paymentt_method, :status, :postage, :amount, :name, :card_id)
-
+    params[:order][:payment_method] = params[:order][:payment_method].to_i
+    # enumで数値型に変換するため
+    params.require(:order).permit(:customer_id,:postal_code, :email, :address, :telephone_number, :order_price, :payment_method, :status, :postage, :amount, :name, :card_id, :credit_number, :card_name, :security_code)
   end
 end

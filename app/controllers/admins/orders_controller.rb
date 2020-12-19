@@ -13,11 +13,11 @@ class Admins::OrdersController < ApplicationController
   def update
   	@order = Order.find(params[:id])
   	@order.update(order_params)
-  	redirect_to orders_path
+  	redirect_to admins_orders_path
   end
   # 注文ステータス更新
   private
   def order_params
-  	params.require(:order).permit(:customer_id, :postal_code, :email, :address, :telephone_number, :order_price, :payment_method, :status, :postage)
+  	params.require(:order).permit(:customer_id, :postal_code, :email, :address, :telephone_number, :order_price, :payment_method, :status, :postage, :name)
   end
 end

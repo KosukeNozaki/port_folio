@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   devise_for :customers, controllers: { registrations: 'publics/registrations', sessions: 'publics/sessions'}
 
   scope module: :publics do
+    resources :searches, only: [:index]
     resources :customers, except: [:new, :destroy ] do
       collection do
         patch :status
       end
     end
-    resources :cards, only: [:index, :show ]
+    resources :cards, only: [:index, :show, :new ]
     resources :cart_cards, only: [:index, :update, :destroy, :create] do
       collection do
         delete 'all_destroy'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
         collection do
           post :confirm
           get :thanks
+          post :payment_screen
         end
     end
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]

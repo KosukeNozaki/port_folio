@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_060435) do
+ActiveRecord::Schema.define(version: 2020_12_19_145855) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 2020_12_17_060435) do
     t.integer "address_option", default: 0
     t.integer "postage"
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "credit_number"
+    t.string "card_name"
+    t.integer "security_code"
+  end
+
+  create_table "searches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,6 @@
+<h2>検索結果</h2>
+
+<% @cards.each do |card| %>
+ <%= link_to card.name, card_path(card) %>
+ <%= attachment_image_tag card, :image, style:"height:150px;, width:150px;" %>
+<% end %>

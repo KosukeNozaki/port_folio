@@ -9,26 +9,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <!--   <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header"> -->
-          <% if admin_signed_in? %>
-            <%= link_to "商品一覧", admins_cards_path %>
-            <%= link_to "会員一覧", admins_customers_path %>
-            <%= link_to "注文一覧", admins_orders_path %>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          <% elsif customer_signed_in? %>
-            <%= link_to "マイページ", customer_path(current_customer) %>
-            <%= link_to "商品一覧", cards_path %>
-             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-          <% else %>
-            <%= link_to "新規登録", new_customer_registration_path %>
-            <%= link_to "ログイン", new_customer_session_path %>
-            <%= link_to "管理者の方はこちら", new_admin_session_path %>
-          <% end %>
-        </div>
-      </div>
-    </nav>
+        <%= link_to root_path do %>
+          <h2>wixoss通販サイト</h2>
+        <% end %>
+    <%= form_tag(new_card_path, method: :get) do %>
+      <input type="text" name="name" id="search">
+      <%= submit_tag '検索', name: nil %>
+    <% end %>
+    <% if admin_signed_in? %>
+      <%= link_to "商品一覧", admins_cards_path %>
+      <%= link_to "会員一覧", admins_customers_path %>
+      <%= link_to "注文一覧", admins_orders_path %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+    <% elsif customer_signed_in? %>
+      <%= link_to "マイページ", customer_path(current_customer) %>
+      <%= link_to "商品一覧", cards_path %>
+      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "新規登録", new_customer_registration_path %>
+      <%= link_to "ログイン", new_customer_session_path %>
+      <%= link_to "管理者の方はこちら", new_admin_session_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

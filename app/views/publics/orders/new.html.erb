@@ -4,7 +4,7 @@
 			<div class="table">
 				<h2>商品情報入力</h2>
 				<table>
-				<%= form_with(model: @order, url:confirm_orders_path, local:true) do |f| %>
+				<%= form_with(model: @order, url:payment_screen_orders_path, method: :post, local:true) do |f| %>
 					<thead>
 							<tr>
 								<th>支払い方法</th>
@@ -54,7 +54,7 @@
 								<th>宛名</th>
 								<td><%= f.text_field :宛名 %></td>
 						</tr>
-								<td><%= f.submit "注文確認へ" %></td>
+								<td><%= f.submit "次へ" %></td>
 					<% end %>
 				</table>
 			</div>

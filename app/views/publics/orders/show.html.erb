@@ -40,9 +40,12 @@
 					</thead>
 					<tbody>
 						<% @order_items.each do |order_item| %>
-							<%= order_item.card.name %>
-							<%= order_item.order_price %>
-							<%= order_item.subtotal_price %>
+						<tr>
+							<td><%= order_item.card.name %></td>
+							<td><%= order_item.order_price %></td>
+							<td><%= order_item.subtotal_price %></td>
+							<td><%= order_item.amount %></td>
+						</tr>
 						<% end %>
 					</tbody>
 				</table>
