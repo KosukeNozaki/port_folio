@@ -7,3 +7,4 @@ class OrderItem < ApplicationRecord
 		# 左辺部分でitemsテーブルの値段カラムを持ってくる、右辺でcart_itemの数量のカラムを持ってくる
 	end
 end
+
