@@ -1,4 +1,4 @@
-class Admins::GenresController < ApplicationController()
+class Admins::GenresController < ApplicationController
    # ジャンル管理画面（一覧・追加も含む）
   def index
     genres = Genre.all
