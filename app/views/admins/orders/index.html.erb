@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-7">
+		<div class="col-sm-3">
 			<div class="table">
 				<h2>注文履歴画面</h2>
 				<table>
@@ -14,10 +14,12 @@
 					</thead>
 					<tbody>
 						<% @orders.each do |order| %>
-							<td><%= link_to "order.created_at", order_path(order) %></td>
+						<tr>
+							<td><%= link_to order.created_at, admins_order_path(order) %></td>
 							<td><%= order.name %></td>
-							<td><%= order.amount %></td>
+							<td><%= order.order_items.sum(:amount) %></td>
 							<td><%= order.status %></td>
+						</tr>
 						<% end %>
 					</tbody>
 				</table>

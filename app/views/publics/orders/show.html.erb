@@ -1,26 +1,30 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-7">
-			<div class="order_show_form">
-				<%= form_with model:@order do |f| %>
+			<div class="table">
 				<h2>注文履歴詳細</h2>
-				<tr>
-					<th>購入者</th>
-					<td><%= @order.name %></td>
-				</tr>
-				<tr>
-					<th>注文日</th>
-					<td><%= @order_created_at %></td>
-				</tr>
-				<tr>
-					<th>配送先</th>
-					<td><%= @order.address %></td>
-				</tr>
-				<tr>
-					<th>支払方法</th>
-					<td><%= @order.status %></td>
-					<td><%= f.submit "更新" %></td>
-				</tr>
+				<table>
+					<tr>
+						<th>購入者</th>
+						<td><%= @order.name %></td>
+					</tr>
+					<tr>
+						<th>注文日</th>
+						<td><%= @order.created_at %></td>
+					</tr>
+					<tr>
+						<th>配送先</th>
+						<td><%= @order.address %></td>
+					</tr>
+					<tr>
+						<th>支払方法</th>
+						<td><%= @order.payment_method %></td>
+					</tr>
+					<tr>
+						<th>ステータス</th>
+						<td><%= @order.status %></td>
+					</tr>
+			</table>
 			</div>
 		</div>
 		<div class="col-sm-5">
@@ -35,10 +39,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% @orders.each do |order| %>
-							<%= order.item.name %>
-							<%= order.item.price %>
-							<%= order.total_price %>
+						<% @order_items.each do |order_item| %>
+							<%= order_item.card.name %>
+							<%= order_item.order_price %>
+							<%= order_item.subtotal_price %>
 						<% end %>
 					</tbody>
 				</table>
@@ -54,7 +58,7 @@
 				<td><%= @order.postage %></td>
 			</tr>
 				<th>請求金額合計</th>
-				<td><%= @order.total_price + @order.postage %></td>
+				<td><%= @total_price %></td>
 			</tr>
 		</div>
 	</div>

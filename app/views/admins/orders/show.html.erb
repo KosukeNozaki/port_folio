@@ -21,6 +21,7 @@
 					<td><%= @order.status %></td>
 					<td><%= f.submit "更新" %></td>
 				</tr>
+				<% end %>
 			</div>
 		</div>
 		<div class="col-sm-5">
@@ -35,10 +36,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% @orders.each do |order| %>
-							<%= order.item.name %>
-							<%= order.item.price %>
-							<%= order.total_price %>
+						<% @order_items.each do |order_item| %>
+							<%= order_item.card.name %>
+							<%= order_item.order_price %>
+							<%= order_item.amount %>
+							<%= order_item.order.sub_total_price %>
 						<% end %>
 					</tbody>
 				</table>
