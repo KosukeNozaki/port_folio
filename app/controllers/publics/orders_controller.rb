@@ -53,7 +53,7 @@ class Publics::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.status = 0
     @order.postage = 200
-    @order.save
+    @order.save!
       @cards = current_customer.cart_cards
       @cards.each do |card|
         @order_items = OrderItem.new
@@ -62,7 +62,7 @@ class Publics::OrdersController < ApplicationController
         @order_items.order_price = @card.price
         @order_items.card_id = card.card_id
         @order_items.amount = card.amount
-        @order_items.save
+        @order_items.save!
       end
       current_customer.cart_cards.destroy_all
       flash[:complete] = "ご注文ありがとうございました。"

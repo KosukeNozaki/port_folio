@@ -4,9 +4,6 @@ class Order < ApplicationRecord
 	has_many :cards, dependent: :destroy
 	has_many :order_items, dependent: :destroy
 	validates :payment_method, inclusion: { in: Order.payment_methods.keys }
-	validates :credit_number, presence: true
-	validates :card_name, presence: true
-	validates :security_code, presence: true
 	# 関連知の値を検知しないことでorder.saveでerrorがでなくなる
 
 	enum status: { "入金待ち": 0,  "発送準備中": 1, "発送済み": 2 }
