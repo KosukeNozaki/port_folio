@@ -53,7 +53,7 @@ class Publics::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.status = 0
     @order.postage = 200
-    if @order.save
+    @order.save
       @cards = current_customer.cart_cards
       @cards.each do |card|
         @order_items = OrderItem.new
@@ -67,10 +67,6 @@ class Publics::OrdersController < ApplicationController
       current_customer.cart_cards.destroy_all
       flash[:complete] = "ご注文ありがとうございました。"
       redirect_to root_path
-    else
-      flash.now[:alert] = '未入力の項目があります。'
-      render "new"
-    end
   end
   # 注文履歴画面
   def index
