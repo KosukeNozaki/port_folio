@@ -1,4 +1,9 @@
 <div class="container">
+	<div class = 'notifications' >
+		<% flash.each do |key, value| %>
+			<%= content_tag(:div, value, class: key) %>
+		<% end %>
+	</div>
 	<div class="row">
 		<div class="col-sm-7">
 			<div class="table">
@@ -10,7 +15,7 @@
 								<th>支払い方法</th>
 							</tr>
 							<tr>
-								<td><%= f.radio_button :payment_method, 0 %></td>
+								<td><%= f.radio_button :payment_method, 0, {:checked => true} %></td>
 								<th>クレジットカード</th>
 							</tr>
 							<tr>
@@ -23,7 +28,7 @@
 					<thead>
 							<th>お届け先</th>
 						<tr>
-							<td><%= radio_button_tag(:address_option, 0) %></td>
+							<td><%= radio_button_tag(:address_option, 0, {:checked => true} ) %></td>
 							<th>ご自身の住所</th>
 						</tr>
 						<tr>
@@ -56,10 +61,9 @@
 						</tr>
 								<td><%= f.submit "次へ" %></td>
 					<% end %>
+				</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 </div>
-
-

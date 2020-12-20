@@ -6,13 +6,30 @@ class Publics::OrdersController < ApplicationController
     # ログインしている顧客のidを取得
   end
   # クレジットカードor銀行振込入力画面
-    def payment_screen
+  def payment_screen
     @order = Order.new(order_params)
-    end
+    @addresses = Address.where(customer_id: current_customer)
+  end
     # 注文情報確認画面
   def confirm
     @cart_cards = current_customer.cart_cards
     @order = Order.new(order_params)
+    if order_params[:payment_method] == 0 and order_params[:credit_number].blank?
+      flash[:alert] = "未入力の項目があります。"
+      render 'payment_screen'
+      return
+    end
+    if order_params[:payment_method] == 0 and order_params[:card_name].blank?
+      flash[:alert] = "未入力の項目があります。"
+      render 'payment_screen'
+      return
+    end
+    if order_params[:payment_method] == 0 and order_params[:security_code].blank?
+      flash[:alert] = "未入力の項目があります。"
+      render 'payment_screen'
+      return
+    end
+
     @order.postage = 200
     if params[:address_option] == "0"
       @order.postal_code = current_customer.postal_code
@@ -36,7 +53,7 @@ class Publics::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.status = 0
     @order.postage = 200
-    @order.save
+    if @order.save
       @cards = current_customer.cart_cards
       @cards.each do |card|
         @order_items = OrderItem.new
@@ -47,9 +64,13 @@ class Publics::OrdersController < ApplicationController
         @order_items.amount = card.amount
         @order_items.save
       end
-      byebug
-    current_customer.cart_cards.destroy_all
-    redirect_to root_path
+      current_customer.cart_cards.destroy_all
+      flash[:complete] = "ご注文ありがとうございました。"
+      redirect_to root_path
+    else
+      flash.now[:alert] = '未入力の項目があります。'
+      render "new"
+    end
   end
   # 注文履歴画面
   def index
@@ -65,6 +86,6 @@ class Publics::OrdersController < ApplicationController
   def order_params
     params[:order][:payment_method] = params[:order][:payment_method].to_i
     # enumで数値型に変換するため
-    params.require(:order).permit(:customer_id,:postal_code, :email, :address, :telephone_number, :order_price, :payment_method, :status, :postage, :amount, :name, :card_id, :credit_number, :card_name, :security_code)
+    params.require(:order).permit(:customer_id,:postal_code, :email, :address, :telephone_number, :order_price, :payment_method, :address_option, :status, :postage, :amount, :name, :card_id, :credit_number, :card_name, :security_code)
   end
 end

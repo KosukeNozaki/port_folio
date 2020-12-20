@@ -1,7 +1,15 @@
 <%= form_with(model: @order, url:confirm_orders_path, local:true) do |f| %>
-	<% if @order.payment_method == 0 %>
+	<%= f.hidden_field :payment_method, :value => @order.payment_method == "bank_transfer" ? "1" : "0" %>
+	<%= f.hidden_field :address_option, :value => @order.address_option %>
+	<% if @order.credit_card? %>
 		<div class="container">
 			<div class="row">
+				<div class="container">
+	<div class = 'notifications' >
+		<% flash.each do |key, value| %>
+			<%= content_tag(:div, value, class: key) %>
+		<% end %>
+	</div>
 				<div class="col-sm-7">
 					<div class="table">
 						<h2>クレジットカード情報を入力してください</h2>
@@ -24,7 +32,7 @@
 						</table>
 					</div>
 				</div>
-	<% else @order.payment_method == 1 %>
+	<% else @order.bank_transfer? %>
 				<div class="col-sm-7">
 					<div class="table">
 						<h2>下記の銀行口座までお振込みください。</h2>

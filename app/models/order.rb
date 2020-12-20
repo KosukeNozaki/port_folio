@@ -1,9 +1,14 @@
 class Order < ApplicationRecord
+		enum payment_method: { credit_card: 0, bank_transfer: 1 }
 	belongs_to :customer, optional: true
 	has_many :cards, dependent: :destroy
 	has_many :order_items, dependent: :destroy
+	validates :payment_method, inclusion: { in: Order.payment_methods.keys }
+	validates :credit_number, presence: true
+	validates :card_name, presence: true
+	validates :security_code, presence: true
 	# 関連知の値を検知しないことでorder.saveでerrorがでなくなる
-	enum payment_method: { "クレジットカード": 0, "銀行振込": 1 }
+
 	enum status: { "入金待ち": 0,  "発送準備中": 1, "発送済み": 2 }
 	def total_price
 	  total = 0
