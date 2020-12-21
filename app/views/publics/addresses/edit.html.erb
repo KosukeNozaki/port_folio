@@ -1,2 +1,26 @@
-<h1>Publics::Addresses#edit</h1>
-<p>Find me in app/views/publics/addresses/edit.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="table">
+				<table>
+ 					<%= form_with(model: @address, local:true) do |f| %>
+ 						<tr>
+	 						<th>郵便番号</th>
+						 	<td><%= f.text_field :postal_code %></td>
+						</tr>
+						<tr>
+	 						<th>住所</th>
+						 	<td><%= f.text_field :address %></td>
+						 </tr>
+						 <tr>
+	 						<th>宛名</th>
+						 	<td><%= f.text_field :name %></td>
+						 </tr>
+							<td><%= f.submit "情報更新" %></td>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

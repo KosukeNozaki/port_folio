@@ -28,15 +28,15 @@
 					<thead>
 							<th>お届け先</th>
 						<tr>
-							<td><%= radio_button_tag(:address_option, 0, {:checked => true} ) %></td>
+							<td><%= f.radio_button :address_option, 0, {:checked => true}  %></td>
 							<th>ご自身の住所</th>
 						</tr>
 						<tr>
-							<td><%= radio_button_tag(:address_option, 1) %></td>
+							<td><%= f.radio_button :address_option, 1 %></td>
 							<th>登録済住所から選択</th>
 						</tr>
 						<tr>
-							<td><%= radio_button_tag(:address_option, 2) %></td>
+							<td><%= f.radio_button :address_option, 2 %></td>
 							<th>新しいお届け先</th>
 						</tr>
 					</thead>
@@ -59,6 +59,7 @@
 								<th>宛名</th>
 								<td><%= f.text_field :宛名 %></td>
 						</tr>
+						
 								<td><%= f.submit "次へ" %></td>
 					<% end %>
 				</tbody>
