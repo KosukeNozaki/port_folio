@@ -27,7 +27,7 @@
 				      <td><%= address.address %></td>
 				      <td><%= address.name %></td>
 				      <td><%= link_to "編集する", edit_address_path(address) %></td>
-				      <td><%= link_to "削除する", address_path(address), method: :delete %> </td>
+				      <td><%= link_to "削除する", address_path(address), method: :delete, data: { confirm: "削除してもよろしいでしょうか？" } %> </td>
 				      <% end %>
 				      <%= link_to "マイページへ", customer_path(current_customer) %>
 				      <%=  link_to "注文履歴一覧へ", orders_path %>

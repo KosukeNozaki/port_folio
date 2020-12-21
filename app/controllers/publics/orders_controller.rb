@@ -3,18 +3,22 @@ class Publics::OrdersController < ApplicationController
     # 注文情報入力画面（支払方法・配送先の選択)
     @order = Order.new
     @addresses = Address.where(customer_id: current_customer)
-    redirect_to payment_screen_orders_path(address_option: order_params[:address_option], payment_method: order_params[:payment_method])
     # ログインしている顧客のidを取得
   end
   # クレジットカードor銀行振込入力画面
   def payment_screen
     @order = Order.new(order_params)
     @addresses = Address.where(customer_id: current_customer)
-    redirect_to confirm_orders_path(address_option: params[:address_option],payment_method: params[:payment_method] )
+    @order.address_option = params[:order][:address_option]
+    @order.payment_method = params[:order][:payment_method]
+    if params[:order][:address_option] == "1"
+    @delivery = params[:order][:delivery]
+    end
+    # @order.name = params[:order][:name]
+    # @order.postal_code = params[:order][:postal_code]
   end
     # 注文情報確認画面
   def confirm
-    byebug
     @cart_cards = current_customer.cart_cards
     @order = Order.new(order_params)
     if order_params[:payment_method] == 0 and order_params[:credit_number].blank?
@@ -34,16 +38,18 @@ class Publics::OrdersController < ApplicationController
     end
 
     @order.postage = 200
-    if params[:address_option] == "0"
+    if params[:order][:address_option] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.full_name
-    elsif params[:address_option] == "1"
+    elsif params[:order][:address_option] == "1"
       @address = Address.find(params[:order][:delivery])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
     end
+    @order.address_option = params[:order][:address_option]
+    @order.payment_method = params[:order][:payment_method]
   end
   # 注文完了画面
   def thanks
@@ -56,17 +62,16 @@ class Publics::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.status = 0
     @order.postage = 200
-    if params[:address_option] == "0"
+    if params[:order][:address_option] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.full_name
-    elsif params[:address_option] == "1"
+    elsif params[:order][:address_option] == "1"
       @address = Address.find(params[:order][:delivery])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
     end
-    byebug
     @order.save!
       @cards = current_customer.cart_cards
       @cards.each do |card|

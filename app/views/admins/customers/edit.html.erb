@@ -38,8 +38,8 @@
 						</tr>
 						<tr>
 							<th>退会ステータス</th>
-							<td><%= f.radio_button :is_active, checked: true %>会員
-							<%= f.radio_button :is_active, "退会" %>退会</td>
+							<td><%= f.radio_button :is_active, true %>会員
+								<%= f.radio_button :is_active, false %>退会</td>
 						</tr>
 						<tr>
 							<td><%= f.submit "情報更新" %></td>

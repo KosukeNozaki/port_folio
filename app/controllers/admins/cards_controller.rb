@@ -12,7 +12,7 @@ class Admins::CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-    @card.save
+    @card.save!
     redirect_to admins_cards_path
   end
 

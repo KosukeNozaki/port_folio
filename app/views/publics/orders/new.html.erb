@@ -1,9 +1,4 @@
 <div class="container">
-	<div class = 'notifications' >
-		<% flash.each do |key, value| %>
-			<%= content_tag(:div, value, class: key) %>
-		<% end %>
-	</div>
 	<div class="row">
 		<div class="col-sm-7">
 			<div class="table">
@@ -49,17 +44,16 @@
 							<td><%= f.collection_select(:delivery, @addresses, :id, :registration_address) %></td>
 						<tr>
 								<th>郵便番号(ハイフンなし)</th>
-								<td><%= f.text_field :郵便番号 %></td>
+								<td><%= f.text_field :postal_code %></td>
 						</tr>
 						<tr>
 								<th>住所</th>
-								<td><%= f.text_field :住所 %></td>
+								<td><%= f.text_field :address %></td>
 						</tr>
 						<tr>
 								<th>宛名</th>
-								<td><%= f.text_field :宛名 %></td>
+								<td><%= f.text_field :name %></td>
 						</tr>
-						
 								<td><%= f.submit "次へ" %></td>
 					<% end %>
 				</tbody>

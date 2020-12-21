@@ -17,8 +17,10 @@
 		      		<tbody>
 						<% @cards.each do |card| %>
 							<tr>
-								<td><%= attachment_image_tag card, :image, style:"height:150px;, width:150px;" %></td>
-								<td><%= card.name %></td>
+								<td><%= link_to card_path(card) do %>
+									<%= attachment_image_tag card, :image, style:"height:100px;, width:100px;" %>
+									<%= card.name %></td>
+									<% end %>
 								<td><%= card.price %></td>
 								<td><%= card.genre.name %></td>
 								<td><% if card.is_active == true %>
@@ -27,7 +29,7 @@
 									売り切れ中
 									<% end %></td>
 								<td><%= link_to "商品情報編集へ", edit_admins_card_path(card) %></td>
-								<td><%= link_to "商品情報削除", admins_card_path(card), method: :delete %></td>
+								<td><%= link_to "商品情報削除", admins_card_path(card), method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
 							</tr>
 						<% end %>
 					</tbody>

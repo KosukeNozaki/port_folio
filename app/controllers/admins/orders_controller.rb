@@ -9,7 +9,6 @@ class Admins::OrdersController < ApplicationController
     @order_items = @order.order_items
   end
   # 注文詳細画面
-
   def update
   	@order = Order.find(params[:id])
   	@order.update(order_params)

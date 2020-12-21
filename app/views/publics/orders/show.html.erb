@@ -43,8 +43,8 @@
 						<tr>
 							<td><%= order_item.card.name %></td>
 							<td><%= order_item.order_price %></td>
-							<td><%= order_item.subtotal_price %></td>
 							<td><%= order_item.amount %></td>
+							<td><%= order_item.subtotal_price %></td>
 						</tr>
 						<% end %>
 					</tbody>
@@ -61,7 +61,7 @@
 				<td><%= @order.postage %></td>
 			</tr>
 				<th>請求金額合計</th>
-				<td><%= @total_price %></td>
+				<td><%= @order.order_price + @order.postage %></td>
 			</tr>
 		</div>
 	</div>
