@@ -1,24 +1,27 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-4">
+			<h2>詳細画面</h2>
 			<div class="table">
 				<table>
 					<thead>
-						<h2>カード詳細画面</h2>
 						<%= attachment_image_tag @card, :image, style:"height:300px;, width:300px;" %>
-						<tr>
-							<th>カード名</th>
-							<td><%= @card.name %></td>
-						</tr>
-						<tr>
-							<th>カード説明文</th>
-							<td><%= @card.introduction %></td>
-						</tr>
-						<tr>
-							<th>税抜き価格</th>
-							<td><%= @card.price %></td>
-						</tr>
-						<tbody>
+						</thead>
+				</table>
+				<table>
+					<tr>
+						<td><%= @card.name %></td>
+					</tr>
+					<tr>
+						<td><%= @card.introduction %></td>
+					</tr>
+					<tr>
+						<th>価格
+						<%= @card.price %></th>
+					</tr>
+				</table>
+				<table>
+					<tbody>
 						 <% if customer_signed_in? %>
 						<%= form_with model:@cart_card, url:cart_cards_path, local:true do |f| %>
 						<tr>
@@ -32,10 +35,11 @@
 						</tr>
 							<% end %></td>
 							<% else %>
-							<h2>カートに追加するには会員登録が必要です。</h2>
+						<tr>
+							<th>カートに追加するには会員登録が必要です</th>
+						</tr>
 							<% end %>
 						</tbody>
-						</thead>
 				</table>
 			</div>
 		</div>

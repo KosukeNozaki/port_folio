@@ -6,7 +6,7 @@
 					<thead>
 						<tr>
 							<th>商品名</th>
-							<th>単価(税込)</th>
+							<th>価格</th>
 							<th>数量</th>
 							<th>小計</th>
 						</tr>
@@ -40,22 +40,34 @@
 			<div class= "confirm-form">
 				<div class="col-sm-4">
 					<%= form_with(model: @order, url:orders_path, local:true) do |f| %>
-						<%= f.label :支払い方法 %>
-						<%= @order.payment_method %>
-						<%= f.label :お届け先 %>
-						<%= @order.postal_code %>
-						<%= @order.address %>
-						<%= @order.name %>
-						<%= f.hidden_field :order_price, :value => current_customer.total_price %>
-						<%= f.hidden_field :name, :value => @order.name %>
-						<%= f.hidden_field :postal_code, :value => @order.postal_code %>
-						<%= f.hidden_field :address, :value => @order.address %>
-						<%= f.hidden_field :customer_id, :value => @order.customer_id %>
-						<%= f.hidden_field :payment_method, :value => @order.payment_method == "bank_transfer" ? "1" : "0" %>
-						<%= f.hidden_field :address_option, :value => @order.address_option %>
-						<%= f.hidden_field :delivery, :value => @address.try(:id) %>
+					<table>
+						<tr>
+								<th><%= f.label :支払い方法 %>
+								<%= @order.payment_method %></th>
+						</tr>
+						<tr>
+								<th><%= f.label :お届け先 %>
+								〒<%= @order.postal_code %></th>
+						</tr>
+						<tr>
+								<th><%= f.label :住所 %>
+									<%= @order.address %>
+						</th>
+						<tr>
+								<th><%= f.label :宛名 %>
+								<%= @order.name %></th>
+						</tr>
+						<tr>
+							<td><%= f.submit "注文を確定する" %></td>
+								<%= f.hidden_field :order_price, :value => current_customer.total_price %>
+								<%= f.hidden_field :name, :value => @order.name %>
+								<%= f.hidden_field :postal_code, :value => @order.postal_code %>
+								<%= f.hidden_field :address, :value => @order.address %>
+								<%= f.hidden_field :customer_id, :value => @order.customer_id %>
+								<%= f.hidden_field :payment_method, :value => @order.payment_method == "bank_transfer" ? "1" : "0" %>
+								<%= f.hidden_field :address_option, :value => @order.address_option %>
+								<%= f.hidden_field :delivery, :value => @address.try(:id) %>
 						<!-- .try(id)address.idがない場合に代わりにnilが入る記述 -->
-						<%= f.submit "注文を確定する" %>
 					<% end %>
 				</div>
 			</div>

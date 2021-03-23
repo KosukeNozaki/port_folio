@@ -23,36 +23,44 @@
 					<thead>
 							<th>お届け先</th>
 						<tr>
-							<td><%= f.radio_button :address_option, 0, {:checked => true}  %></td>
-							<th>ご自身の住所</th>
+							<th><%= f.radio_button :address_option, 0, {:checked => true}  %>
+							ご自身の住所</th>
 						</tr>
 						<tr>
-							<td><%= f.radio_button :address_option, 1 %></td>
-							<th>登録済住所から選択</th>
+							<th>〒<%= current_customer.postal_code %>
+								  住所：<%= current_customer.address %>
+							      名前：<%= current_customer.full_name %></th>
 						</tr>
 						<tr>
-							<td><%= f.radio_button :address_option, 2 %></td>
-							<th>新しいお届け先</th>
+							<th><%= f.radio_button :address_option, 1 %>
+							登録済住所から選択</th>
+						</tr>
+						<tr>
+							<td><%= f.collection_select(:delivery, @addresses, :id, :registration_address) %></td>
+						</tr>
+						<tr>
+							<th><%= f.radio_button :address_option, 2 %>
+							新しいお届け先</th>
+						</tr>
+						<tr>
+							<th>郵便番号
+							<%= f.text_field :postal_code %></th>
+						</tr>
+						<tr>
+							<th>住所
+							<%= f.text_field :address %></th>
+						</tr>
+						<tr>
+							<th>宛名
+							<%= f.text_field :name %></th>
 						</tr>
 					</thead>
 				<tbody>
 						<tr>
-							<td>〒<%= current_customer.postal_code %></td>
-							<td><%= current_customer.address %></td>
-							<td><%= current_customer.full_name %></td>
-						</tr>
-							<td><%= f.collection_select(:delivery, @addresses, :id, :registration_address) %></td>
-						<tr>
-								<th>郵便番号(ハイフンなし)</th>
-								<td><%= f.text_field :postal_code %></td>
 						</tr>
 						<tr>
-								<th>住所</th>
-								<td><%= f.text_field :address %></td>
 						</tr>
 						<tr>
-								<th>宛名</th>
-								<td><%= f.text_field :name %></td>
 						</tr>
 								<td><%= f.submit "次へ" %></td>
 					<% end %>
