@@ -24,6 +24,11 @@
 							<%= f.radio_button :payment_method, "銀行振込" %>銀行振込</td>
 						</tr>
 						<tr>
+							<th>注文ステータス</th>
+							<td><%= f.radio_button :status, "入金待ち" %>入金待ち
+								<%= f.radio_button :status, "発送準備中" %>発送準備中
+									<%= f.radio_button :status, "発送完了" %>発送完了</td>
+						<tr>
 							<td><%= f.submit "更新" %></td>
 						</tr>
 					</thead>
